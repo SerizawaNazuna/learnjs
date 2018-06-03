@@ -8,6 +8,9 @@ const GameLitActions = {
             type: GameActionTypes.GET_LIST,
             payload: gameList
         })
+    },
+    signinGoogle(args) {
+        console.log(args);
     }
 }
 
