@@ -9,13 +9,17 @@
     "babel-loader": "^7.1.4",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
+    "css-loader": "^0.28.11",
     "enzyme": "^3.3.0",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "file-loader": "^1.1.11",
     "flux": "^3.1.3",
     "jasmine": "^3.1.0",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
     "react-jsonschema-form": "^1.0.3",
-    "react-router-dom": "^4.2.2"
+    "react-router-dom": "^4.2.2",
+    "react-google-login": "^3.2.1"
   },
   "devDependencies": {
     "enzyme-adapter-react-16": "^1.1.1",
