@@ -24,28 +24,6 @@ describe('Routing', () => {
     });
 });
 
-describe('GameList', () => {
-    //保有ゲーム一覧を取得するメソッドがコールされる
-    it('can show the game-list page', async () => {
-        const wrapper = shallow(<GameList />);
-        spyOn(GameListActions, 'getGameList');
-        await wrapper.instance().componentDidMount();
-        expect(GameListActions.getGameList).toHaveBeenCalled();
-    });
-
-    //GameDetailはゲーム内容をテーブル上に表示する
-    it('can show the game\'s detail as table', () => {
-        const game = {
-            id: 1,
-            name: 'テストゲーム',
-            description: '表示テスト',
-            url: 'test!'
-        }
-        const wrapper = shallow(<GameDetail game={game} />);
-        expect(wrapper.find('td').first().text()).toBe('テストゲーム');
-    });
-});
-
 describe('Get All Games', ()=>{
     //ゲームリストを取得する
     const pathToApi = APIPath.SEARCH;
@@ -58,6 +36,48 @@ describe('Get All Games', ()=>{
             maxPlayNum: 2
         }
         GameListActions.getGameList(searchCondition);
-        expect(axios.get).toHaveBeenCalledWith(pathToApi + '?id=' + searchCondition.id + '?name=' + searchCondition.name + '?minPlayNum=' + searchCondition.minPlayNum + '?maxPlayNum=' + searchCondition.maxPlayNum);
+        expect(axios.get).toHaveBeenCalledWith(pathToApi + '?id=' + searchCondition.id + '&name=' + searchCondition.name + '&minPlayNum=' + searchCondition.minPlayNum + '&maxPlayNum=' + searchCondition.maxPlayNum);
+    });
+});
+
+describe('GameList', () => {
+    //保有ゲーム一覧を取得するメソッドがコールされる
+    it('can show the game-list page', async () => {
+        const testValue = [
+            {
+                id:1,
+                name:"stub",
+                description: "stututu",
+                url: "aaa.jp"
+            },
+            {
+                id:2,
+                name:"2stub",
+                description: "stststs",
+                url: ""
+            }
+        ]
+        spyOn(GameListActions, 'getGameList');
+        spyOn(axios, 'get').and.returnValue(Promise.resolve(testValue));
+        const aaa = await axios.get("aaaa");
+        console.log("tetete:" + aaa);
+        axios.get().then((result)=>{console.log(result)});
+        const wrapper = shallow(<GameList />);
+        //ゲームリスト取得メソッドをコールする
+        expect(GameListActions.getGameList).toHaveBeenCalled();
+        //setStateをして自分のstateを更新する
+        expect(wrapper.state().games.length).toBe(2);
+    });
+
+    //GameDetailはゲーム内容をテーブル上に表示する
+    it('can show the game\'s detail as table', () => {
+        const game = {
+            id: 1,
+            name: 'テストゲーム',
+            description: '表示テスト',
+            url: 'test!'
+        }
+        const wrapper = shallow(<GameDetail game={game} />);
+        expect(wrapper.find('td').first().text()).toBe('テストゲーム');
     });
 });

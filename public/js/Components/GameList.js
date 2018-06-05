@@ -14,22 +14,25 @@ class GameList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            games:[]
+            games:[],
+            signedIn: false
         }
     }
 
     componentDidMount() {
+        console.log('did');
         const searchConditions = {
             id: '',
             name: '',
             minPlayNum: '',
             maxPlayNum: ''
         }
-        const gamesResult = GameListActions.getGameList(searchConditions);
-        console.log(gamesResult);
-        /*this.setState({
-            games: gamesResult
-        })*/
+        const result = GameListActions.getGameList(searchConditions);
+        this.setState({
+            games: result
+        });
+
+        console.log('done');
     }
 
     render() {
