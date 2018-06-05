@@ -12,5 +12,13 @@ module.exports = {
 				loader: 'babel-loader'
 			}
 		]
+	},
+	mode: 'production',
+	devtool: 'inline-source-map',
+	devServer: {
+		inline: true,
+		hot: true,
+		contentBase: 'public/',
+		port: 3355
 	}
 }
