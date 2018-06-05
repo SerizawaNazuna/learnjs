@@ -6,14 +6,11 @@ const GameListActions = {
     async getGameList(searchConditions) {
         const pathToAPI = APIPath.SEARCH;
 
-
-        try{
-            console.log("aaa" + axios);
-            console.log("aa" + axios.get);
+        try {
             const result = await axios.get(pathToAPI + '?id=' + searchConditions.id + '&name=' + searchConditions.name + '&minPlayNum=' + searchConditions.minPlayNum + '&maxPlayNum=' + searchConditions.maxPlayNum);
-            return result;
+            return result.data;
         }
-        catch(e){
+        catch (e) {
             console.log(e);
             console.log('failed');
             return [];

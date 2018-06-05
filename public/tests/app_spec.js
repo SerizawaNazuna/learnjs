@@ -3,7 +3,7 @@ import { mount, render, configure, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 configure({ adapter: new Adapter() });
 import axios from 'axios';
-import AppDispatcher  from '../js/DisPatcher/AppDispatcher';
+import AppDispatcher from '../js/DisPatcher/AppDispatcher';
 
 import { MemoryRouter } from 'react-router-dom';
 import LandingRouter from '../js/LandingRouter';
@@ -24,10 +24,10 @@ describe('Routing', () => {
     });
 });
 
-describe('Get All Games', ()=>{
+describe('Get All Games', () => {
     //ゲームリストを取得する
     const pathToApi = APIPath.SEARCH;
-    it('can call get-games api with its conditions given by argument', ()=>{
+    it('can call get-games api with its conditions given by argument', () => {
         spyOn(axios, 'get');
         const searchCondition = {
             id: '',
@@ -43,25 +43,27 @@ describe('Get All Games', ()=>{
 describe('GameList', () => {
     //保有ゲーム一覧を取得するメソッドがコールされる
     it('can show the game-list page', async () => {
-        const testValue = [
-            {
-                id:1,
-                name:"stub",
-                description: "stututu",
-                url: "aaa.jp"
-            },
-            {
-                id:2,
-                name:"2stub",
-                description: "stststs",
-                url: ""
-            }
-        ]
+        const testValue = {
+            data: [
+                {
+                    id: 1,
+                    name: "stub",
+                    description: "stututu",
+                    url: "aaa.jp"
+                },
+                {
+                    id: 2,
+                    name: "2stub",
+                    description: "stststs",
+                    url: ""
+                }
+            ]
+        }
+        console.log(testValue);
         spyOn(GameListActions, 'getGameList');
         spyOn(axios, 'get').and.returnValue(Promise.resolve(testValue));
-        const aaa = await axios.get("aaaa");
-        console.log("tetete:" + aaa);
-        axios.get().then((result)=>{console.log(result)});
+        const res = await axios.get('');
+        console.log(res.data);
         const wrapper = shallow(<GameList />);
         //ゲームリスト取得メソッドをコールする
         expect(GameListActions.getGameList).toHaveBeenCalled();

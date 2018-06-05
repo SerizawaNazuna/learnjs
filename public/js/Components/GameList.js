@@ -14,29 +14,27 @@ class GameList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            games:[],
+            games: [],
             signedIn: false
         }
     }
 
-    componentDidMount() {
-        console.log('did');
+    async componentDidMount() {
         const searchConditions = {
             id: '',
             name: '',
             minPlayNum: '',
             maxPlayNum: ''
         }
-        const result = GameListActions.getGameList(searchConditions);
+        const result = await GameListActions.getGameList(searchConditions);
         this.setState({
             games: result
         });
-
-        console.log('done');
     }
 
     render() {
-        const gameDetailComponent = this.state.games.map((value, index) => {
+        let gameDetailComponent;
+        gameDetailComponent = this.state.games.map((value, index) => {
             return (
                 <GameDetail game={value} key={"game_" + index} />
             )
