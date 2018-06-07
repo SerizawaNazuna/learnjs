@@ -10,12 +10,15 @@ import FormSchema from '../Consts/SearchGameFormSchema';
 import uiSchema from '../Consts/SearchGameUISchema';
 
 //所持ゲームを一覧化するためのコンテナ
+const formData = {};
+
 class GameList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             games: []
         }
+        this.search = this.search.bind(this);
     }
 
     async componentDidMount() {
@@ -26,6 +29,13 @@ class GameList extends React.Component {
             maxPlayNum: ''
         }
         const result = await GameListActions.getGameList(searchConditions);
+        this.setState({
+            games: result
+        });
+    }
+
+    async search(formData) {
+        const result = await GameListActions.getGameList(formData.formData);
         this.setState({
             games: result
         });
@@ -46,6 +56,8 @@ class GameList extends React.Component {
                         <Form
                             schema={FormSchema}
                             uiSchema={uiSchema}
+                            formData={formData}
+                            onSubmit={this.search}
                         />
                     </div>
                 </header>
