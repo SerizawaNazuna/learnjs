@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import Form from 'react-jsonschema-form';
 
 import GameListActions from '../Actions/GameListActions';
-import GameGenreIds from '../Actions/GameGenreIds';
 import GameDetail from './GameDetail';
 import FormSchema from '../Consts/SearchGameFormSchema';
 import uiSchema from '../Consts/SearchGameUISchema';
