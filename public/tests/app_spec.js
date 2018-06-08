@@ -50,8 +50,8 @@ describe('game detail', () => {
         const wrapper = shallow(<GameDetail game={game} />);
         expect(wrapper.find('td').length).toBe(5);
         expect(wrapper.find('td').at(0).text()).toBe('テストゲーム');
-        expect(wrapper.find('td').at(1).text()).toBe('test!');
-        expect(wrapper.find('td').at(2).text()).toBe('表示テスト');
+        expect(wrapper.find('td').at(1).text()).toBe('表示テスト');
+        expect(wrapper.find('td').at(2).text()).toBe('test!');
         expect(wrapper.find('td').at(3).text()).toBe('芹澤desu!');
         expect(wrapper.find('td').at(4).text()).toBe('ロッカーの中');
     });
