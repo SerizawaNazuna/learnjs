@@ -1,0 +1,32 @@
+{
+  "games": [
+    {
+      "id": 1,
+      "name": "test",
+      "description": "tetetete",
+      "url": "url.jp"
+    },
+    {
+      "id": 2,
+      "name": "test2",
+      "description": "tetetetetetete",
+      "url": "url.en"
+    },
+    {
+      "id": 3
+    },
+    {
+      "name": "aa",
+      "playNumMin": 2,
+      "playNumMax": 7,
+      "url": "uuuuuu",
+      "owner": "watashi",
+      "place": "anata",
+      "id": 4
+    },
+    {
+      "{\"name\":\"ダンジョンオブマンダム\",\"playNumMin\":2,\"playNumMax\":4,\"url\":\"url\",\"owner\":\"せりざわ\",\"place\":\"自宅\"}": "",
+      "id": 5
+    }
+  ]
+}

@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Link } from 'react-router-dom';
 import GameActions from '../Actions/GameListActions';
-import SignIn from '../Actions/SignIn';
 
 class LandingPage extends React.Component {
     constructor(props) {
@@ -19,6 +18,9 @@ class LandingPage extends React.Component {
                                 <h3>Howdy!! Good Gamers</h3>
                                 <div>
                                     <Link to="games" className="button button-primary">Games</Link>
+                                </div>
+                                <div>
+                                    <Link to="/addGames" className="button button-primary">新規追加</Link>
                                 </div>
                                 <div>
                                     <a href="#problem-1" className="button button-primary">What's Next</a>

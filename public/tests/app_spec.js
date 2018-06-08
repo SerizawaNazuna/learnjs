@@ -4,10 +4,12 @@ import Adapter from 'enzyme-adapter-react-16';
 configure({ adapter: new Adapter() });
 import { waitForState, waitForElement } from 'enzyme-async-helpers';
 import axios from 'axios';
+import Form from 'react-jsonschema-form';
 
 import LandingPage from '../js/Components/landing';
 import GameList from '../js/Components/GameList';
 import GameDetail from '../js/Components/GameDetail';
+import AddGameForm from '../js/Components/AddGameForm';
 import GameListActions from '../js/Actions/GameListActions';
 import APIPath from '../js/Consts/APIPath';
 
@@ -41,10 +43,15 @@ describe('game detail', () => {
             id: 1,
             name: 'テストゲーム',
             description: '表示テスト',
-            url: 'test!'
+            url: 'test!',
+            owner: '芹澤desu!',
+            place: 'ロッカーの中'
         }
         const wrapper = shallow(<GameDetail game={game} />);
         expect(wrapper.find('td').length).toBe(3);
+        expect(wrapper.find('td').at(0).text()).toBe('テストゲーム');
+        expect(wrapper.find('td').at(1).text()).toBe('表示テスト');
+        expect(wrapper.find('td').at(2).text()).toBe('test!');
     });
 });
 
@@ -89,8 +96,6 @@ describe('GameList', () => {
 
 //ゲームをリストに追加する
 describe('Add Games', () => {
-
-    //POSTのreturnによって返却値が変わる
     const postData = {
         name: "ダンジョンオブマンダム　エイト",
         description: "ダンジョンは裸で潜れ。チキンレースをするゲーム",
@@ -107,13 +112,11 @@ describe('Add Games', () => {
         expect(axios.post).toHaveBeenCalledWith(pathToApi, postData);
     });
 
-    //GameListの「Add」ボタン押下したらGameActionsのAddGameを呼べる
+    //新規追加ボタン押下したらGameActionsのAddGameを呼べる
     it('can call Add-BG method when  submit', async () => {
         spyOn(GameListActions, 'addBoardGame').and.returnValue(Promise.resolve(true));
-        spyOn(window, 'alert');
-        const wrapper = shallow(<AddGameForm />);
-        wrapper.find('form').simulate('submit');
+        const wrapper = mount(<AddGameForm />);
+        wrapper.find(Form).simulate('submit');
         await expect(GameListActions.addBoardGame).toHaveBeenCalled();
-        expect(window.alert).toHaveBeenCalled();
     })
 });
