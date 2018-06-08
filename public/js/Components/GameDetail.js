@@ -7,8 +7,6 @@ const GameDetail = (props) => {
             <td>{props.game.name}</td>
             <td>{props.game.description}</td>
             <td>{props.game.url}</td>
-            <td>{props.game.owner}</td>
-            <td>{props.game.place}</td>
         </tr>
     );
 }
